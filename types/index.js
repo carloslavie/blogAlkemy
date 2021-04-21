@@ -1,0 +1,10 @@
+export const OBTENER_POSTS = 'OBTENER_POSTS'
+export const AGREGAR_POST = 'AGREGAR_POST';
+export const EDITAR_POST = 'EDITAR_POST';
+export const VALIDAR_FORMULARIO = 'VALIDAR_FORMULARIO';
+export const POST_ACTUAL = 'POST_ACTUAL';
+export const ELIMINAR_POST = 'ELIMINAR_POST';
+export const POST_ERROR = 'POST_ERROR';
+
+export const MOSTRAR_ALERTA = 'MOSTRAR_ALERTA';
+export const OCULTAR_ALERTA = 'OCULTAR_ALERTA';
