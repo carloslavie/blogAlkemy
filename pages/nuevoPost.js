@@ -10,8 +10,9 @@ import useValidacion from '../hooks/useValidacion';
 import validarCrearPost from '../validacion/validarCrearPost';
 
 const STATE_INICIAL = {
-  title:'',
-  body:''
+  first_name:'',
+  last_name:'',
+  email:''
 }
 
 const NuevoPost = () => {
@@ -23,20 +24,21 @@ const NuevoPost = () => {
   
   const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(STATE_INICIAL, validarCrearPost, crearPost);
 
-  const { title, body } = valores;
+  const { first_name, last_name, email } = valores;
 
   const router = useRouter();
 
   async function crearPost(){
 
     //Crear nuevo post
-    const post = {
-      title,
-      body
+    const nuevoPost = {
+      first_name,
+      last_name,
+      email
     }
 
     //insertar en BD
-    agregarPost(post);
+    agregarPost(nuevoPost);
     router.push('/');
   }
   
@@ -54,28 +56,43 @@ const NuevoPost = () => {
               onSubmit={handleSubmit}              
             >        
                 <Campo>
-                    <label htmlFor="title">Title</label>
+                    <label htmlFor="first_name">First Name</label>
                     <input 
                         type="text"
-                        id="title"
-                        placeholder="Title Name"
-                        name="title"
+                        id="first_name"
+                        placeholder="first Name"
+                        name="first_name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
                 </Campo>
-                {errores.title && <Error>{errores.title}</Error> }
-                        
+                {errores.first_name && <Error>{errores.first_name}</Error> }
                 <Campo>
-                    <label htmlFor="body">Description</label>
-                    <textarea 
-                        id="body"
-                        name="body"
+                    <label htmlFor="last_name">Last Name</label>
+                    <input 
+                        type="text"
+                        id="last_name"
+                        placeholder="last_name Name"
+                        name="last_name"
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
                 </Campo>
-                {errores.body && <Error>{errores.body}</Error> }
+                {errores.last_name && <Error>{errores.last_name}</Error> }
+                <Campo>
+                    <label htmlFor="email">Email</label>
+                    <input 
+                        type="text"
+                        id="email"
+                        placeholder="Email"
+                        name="email"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                    />
+                </Campo>
+                {errores.email && <Error>{errores.email}</Error> }
+                        
+                
                       
                 {error && <Error>{error} </Error>} 
     

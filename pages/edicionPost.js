@@ -19,7 +19,7 @@ const EdicionPost = () => {
   
   const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(post, validarCrearPost, postEdit);
 
-  const { title, body } = valores;
+  const { first_name, last_name } = valores;
 
   const router = useRouter();
 
@@ -27,8 +27,8 @@ const EdicionPost = () => {
 
     //Crear nuevo post
     const nuevoPost = {
-      title,
-      body
+      first_name,
+      last_name
     }
 
     //insertar en BD
@@ -51,29 +51,29 @@ const EdicionPost = () => {
               onSubmit={handleSubmit}
             >        
                 <Campo>
-                    <label htmlFor="title">Title</label>
+                    <label htmlFor="first_name">First Name</label>
                     <input 
                         type="text"
-                        id="title"
-                        name="title"
-                        value={title}
+                        id="first_name"
+                        name="first_name"
+                        value={first_name}
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
                 </Campo>
-                {errores.title && <Error>{errores.title}</Error> }
+                {errores.first_name && <Error>{errores.first_name}</Error> }
 
                 <Campo>
-                    <label htmlFor="body">Description</label>
+                    <label htmlFor="last_name">Last Name</label>
                     <textarea 
-                        id="body"
-                        name="body"
-                        value={body}
+                        id="last_name"
+                        name="last_name"
+                        value={last_name}
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
                 </Campo>
-                {errores.body && <Error>{errores.body}</Error> }
+                {errores.last_name && <Error>{errores.last_name}</Error> }
                       
                       {error && <Error>{error} </Error>}
                 <InputSubmit 

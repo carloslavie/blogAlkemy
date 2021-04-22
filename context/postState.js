@@ -28,11 +28,12 @@ const PostState = props => {
     // Obtener los posteos
     const obtenerPosts = async () => {
         try {
-            const resultado = await clienteAxios.get('/posts');
+            const resultado = await clienteAxios.get('/api/users');
+            console.log(resultado.data.data)
             
             dispatch({
                 type: OBTENER_POSTS,
-                payload: resultado.data
+                payload: resultado.data.data
             })
         } catch (error) {
             console.log(error);            
@@ -42,11 +43,12 @@ const PostState = props => {
     const agregarPost = async post => {
 
          try {
-            const resultado = await clienteAxios.post('/posts', post);
+            const resultado = await clienteAxios.post('/api/users', post);
+            console.log(resultado)
              
             dispatch({
                 type: AGREGAR_POST,
-                payload: resultado.data
+                payload: post
             })
          }  catch (error) {             
             alert(error);
@@ -56,7 +58,7 @@ const PostState = props => {
     //Actualizar un post
     const editarPost = async info => {        
         try {
-            await clienteAxios.put(`/posts/${info.id}`, info)
+            await clienteAxios.put(`/api/users${info.id}`, info)
            
             dispatch({
                 type: EDITAR_POST,
@@ -84,7 +86,7 @@ const PostState = props => {
     // Elimina un proyecto
     const eliminarPost = async id => {
         try {
-            await clienteAxios.delete(`posts/${id}`);
+            await clienteAxios.delete(`/api/users${id}`);
             dispatch({
                 type: ELIMINAR_POST,
                 payload: id

@@ -25,13 +25,13 @@ const Producto = () => {
     const { query: {id} } = router;
 
     const [ postSelected, guardarPostSelected ] = useState({});
-    const { title, body, userId } = postSelected;
+    const { email, first_name, last_name } = postSelected;
     const [ leerDB, guardarLeerDB ] = useState(true)
     
     useEffect(() => {
         if(id && leerDB){
             const obtenerPost = async ()=> {
-                const resultado = await clienteAxios.get(`/posts/${id}`)
+                const resultado = await clienteAxios.get(`/api/users/${id}`)
                 guardarPostSelected(resultado.data)                
             }
             obtenerPost();
@@ -49,12 +49,13 @@ const Producto = () => {
                     <h1 css={css`
                         text-align:center;
                         margin-top:5rem;
-                    `}>{title}</h1>
+                    `}>{email}</h1>
                     
                     <ContenedorProducto>
-                        <p>{body}</p> 
+                        <p>First Name: {first_name}</p> 
+                        <p>Last Name: {last_name}</p> 
                     </ContenedorProducto>
-                        <p>Creado por: {userId}</p>   
+                           
                 </div>
             </>
         </Layout>

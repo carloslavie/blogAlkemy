@@ -11,10 +11,16 @@ const DetallePost = ({post}) => {
     const postsContext = useContext(postContext);
     const { postActual, eliminarPost } = postsContext;
 
-    const { title, id } = post;
+    const { email, id } = post;
 
     const router = useRouter();
 
+
+    const handleDetalle = () =>{
+        postActual(post);
+        console.log(post)
+        router.push('/detallePost');
+    }
     const handleEditar = () =>{
         postActual(post);
         console.log(post)
@@ -41,7 +47,7 @@ const DetallePost = ({post}) => {
                 css={css`
                     margin:1rem;
                 `}
-            >{title}</h3>
+            >{email}</h3>
             
             <div
                 css={css`
@@ -52,9 +58,11 @@ const DetallePost = ({post}) => {
                 justify-content:center;                
                 }
             `}>
-                <Link href="/posts/[id]" as ={`/posts/${id}`}>
-                    <Boton>Detalle</Boton>        
-                </Link>
+                
+                <Boton
+                    onClick={handleDetalle}
+                >Detalle</Boton>        
+                
                 <Boton
                     onClick={handleEditar}
                 >Editar</Boton>                
