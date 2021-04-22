@@ -28,12 +28,11 @@ const Logo = styled.p`
 `;
 
 const Header = () => {
-
     
     return (
         <header
             css={css`
-                border-bottom: 2px solid var(--gris3); //para usar los custom css declarados en layout
+                border-bottom: 2px solid var(--gris3); 
                 padding: 1rem 0;
             `}
         >
@@ -56,8 +55,7 @@ const Header = () => {
                         display: flex;
                         align-items: center;
                     `}
-                >
-                
+                >                
                 </div>
             </ContendedorHeader>
         </header>

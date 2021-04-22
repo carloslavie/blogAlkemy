@@ -20,6 +20,7 @@ const EdicionPost = () => {
   const { post, editarPost } = postsContext;
   
   const [ info, guardarInfo ] = useState({
+      userId:'',
       title:'',
       body:''
   });
@@ -30,7 +31,7 @@ const EdicionPost = () => {
      
     guardarInfo(post);
 
-  }, [])
+  }, [post])
 
 
   //const [ error, guardarError] = useState(false);
@@ -65,25 +66,10 @@ const EdicionPost = () => {
                 text-align: center;
                 margin-top: 5rem;
               `}
-            >New Post</h1>
+            >Edit Post</h1>
             <Formulario
               onSubmit={handleSubmit}
-              // noValidate
-            >
-        
-                <Campo>
-                    <label htmlFor="userId">User</label>
-                    <input 
-                        type="text"
-                        id="userId"
-                        name="userId"
-                        onChange={handleChange}
-                        //onBlur={handleBlur}
-                    />
-                </Campo>
-
-                {/* {errores.userId && <Error>{errores.userId}</Error> } */}
-
+            >        
                 <Campo>
                     <label htmlFor="title">Title</label>
                     <input 
@@ -92,13 +78,9 @@ const EdicionPost = () => {
                         name="title"
                         value={title}
                         onChange={handleChange}
-                        //onBlur={handleBlur}
                     />
                 </Campo>
 
-                {/* {errores.title && <Error>{errores.title}</Error> } */}
-    
-                    
                 <Campo>
                     <label htmlFor="body">Description</label>
                     <textarea 
@@ -106,21 +88,15 @@ const EdicionPost = () => {
                         name="body"
                         value={body}
                         onChange={handleChange}
-                        //onBlur={handleBlur}
                     />
                 </Campo>
 
-                {/* {errores.description && <Error>{errores.description}</Error> } */}
-                      
-                {/* {error && <Error>{error} </Error>} */}
-    
                 <InputSubmit 
                   type="submit"
                   value="Update"
                 />
             </Formulario>
           </>
-        
       </Layout>
     </div>
   )

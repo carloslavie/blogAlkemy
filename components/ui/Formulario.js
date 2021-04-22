@@ -17,12 +17,12 @@ export const Campo = styled.div`
     display:flex;
     align-items:center;
     label{
-        flex: 0 0 150px; // el primer 0 dice si va a crecer o no, el segundo si se va a encojer y el 150px le da el width en flexbox
+        flex: 0 1 150px; 
         font-size:1.8rem
     }
     input, 
     textarea{
-        flex: 1; //Toma todo el espacio disponible restante de lo que toma el label(150px)
+        flex: 1; 
         padding:1rem;
     }
     textarea{

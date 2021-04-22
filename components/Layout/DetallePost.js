@@ -25,12 +25,15 @@ const DetallePost = ({post}) => {
     }
 
     return ( 
-        <>
-        
-        <container
+        <>        
+        <div
             css={css`
             display:flex;
             justify-content:space-between;
+            border-bottom:1px solid #e1e1e1;
+            @media only screen and (max-width:600px){
+                display:block;
+            }
         `}>                
             
             <h3
@@ -43,6 +46,10 @@ const DetallePost = ({post}) => {
                 css={css`
                 display:flex;
                 justify-content: flex-end;
+                
+                @media only screen and (max-width:600px){
+                justify-content:center;                
+                }
             `}>
                 <Link href="/posts/[id]" as ={`/posts/${id}`}>
                     <Boton>Detalle</Boton>        
@@ -54,7 +61,7 @@ const DetallePost = ({post}) => {
                     onClick={()=>handleEliminar(id)}
                 >Eliminar</Boton> 
             </div> 
-        </container>
+        </div>
         </>
      );
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
 
@@ -22,10 +22,10 @@ const Navegacion = () => {
     return ( 
         <Nav>
             <Link href="/">
-                <a>Inicio</a>
+                <a>Home</a>
             </Link>
             <Link href="/nuevoPost">
-                    <a>Nuevo Post</a>
+                    <a>New Post</a>
             </Link>
             
         </Nav>

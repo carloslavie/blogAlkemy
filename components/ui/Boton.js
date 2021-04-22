@@ -9,11 +9,13 @@ const Boton = styled.button`
     text-align:center;
     background-color: #DA552F;
     color: white;
-    &:last-of-type{
-        margin-right:0;
-    }
+    
     &:hover{
         cursor:pointer;
+    }
+    @media only screen and (max-width:600px){
+        padding:2%;
+        margin:2%;       
     }
 `;
 

@@ -1,53 +1,48 @@
 import React, { useState, useContext } from 'react';
 import { css } from '@emotion/react';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 import postContext from '../context/postContext';
 
-
-//import Error404 from '../components/layout/404';
-
 // validaciones
-// import useValidacion from '../hooks/useValidacion';
-// import validarCrearProducto from '../validacion/validarCrearProducto';
+import useValidacion from '../hooks/useValidacion';
+import validarCrearPost from '../validacion/validarCrearPost';
 
-
+const STATE_INICIAL = {
+  title:'',
+  body:''
+}
 
 const NuevoPost = () => {
 
   const postsContext = useContext(postContext);
   const { agregarPost } = postsContext;
   
-  const [ info, guardarInfo ] = useState({});
-
-
-  //const [ error, guardarError] = useState(false);
-
+  const [error, guardarError ] = useState(false);
   
-  // hook de routing para redireccionar
+  const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(STATE_INICIAL, validarCrearPost, crearPost);
+
+  const { title, body } = valores;
+
   const router = useRouter();
 
-  const handleChange = e =>{
-    guardarInfo({
-      ...info,
-      [e.target.name] : e.target.value
-    })
-  }
-    
-  // insertarlo en la base de datos
-  const handleSubmit = e =>{  
-    e.preventDefault();
+  async function crearPost(){
 
-    agregarPost(info);
-  
+    //Crear nuevo post
+    const post = {
+      title,
+      body
+    }
+
+    //insertar en BD
+    agregarPost(post);
     return router.push('/');
   }
   
   return (
     <div>
-      <Layout>
-       
+      <Layout>       
           <>
             <h1
               css={css`
@@ -56,24 +51,8 @@ const NuevoPost = () => {
               `}
             >New Post</h1>
             <Formulario
-              onSubmit={handleSubmit}
-              // noValidate
-            >
-        
-                <Campo>
-                    <label htmlFor="userId">User</label>
-                    <input 
-                        type="text"
-                        id="userId"
-                        placeholder="Ej: 1"
-                        name="userId"
-                        onChange={handleChange}
-                        //onBlur={handleBlur}
-                    />
-                </Campo>
-
-                {/* {errores.userId && <Error>{errores.userId}</Error> } */}
-
+              onSubmit={handleSubmit}              
+            >        
                 <Campo>
                     <label htmlFor="title">Title</label>
                     <input 
@@ -82,34 +61,30 @@ const NuevoPost = () => {
                         placeholder="Title Name"
                         name="title"
                         onChange={handleChange}
-                        //onBlur={handleBlur}
+                        onBlur={handleBlur}
                     />
                 </Campo>
-
-                {/* {errores.title && <Error>{errores.title}</Error> } */}
-    
-                    
+                {errores.title && <Error>{errores.title}</Error> }
+                        
                 <Campo>
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="body">Description</label>
                     <textarea 
-                        id="description"
-                        name="description"
+                        id="body"
+                        name="body"
                         onChange={handleChange}
-                        //onBlur={handleBlur}
+                        onBlur={handleBlur}
                     />
                 </Campo>
-
-                {/* {errores.description && <Error>{errores.description}</Error> } */}
+                {errores.body && <Error>{errores.body}</Error> }
                       
-                {/* {error && <Error>{error} </Error>} */}
+                {error && <Error>{error} </Error>} 
     
                 <InputSubmit 
                   type="submit"
                   value="Post"
                 />
             </Formulario>
-          </>
-        
+          </>        
       </Layout>
     </div>
   )
