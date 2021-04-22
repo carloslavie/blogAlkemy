@@ -23,12 +23,15 @@ export default (state, action) => {
         case EDITAR_POST:
             return{
                 ...state,
-                posts: state.posts.map(post=> post.id === action.payload.id ? action.payload : post)
+                posts: state.posts.map(post=> post.id === action.payload.id ? action.payload : post),
+                consultardb:false,
+                post:null
             }
         case POST_ACTUAL:
              return {
                  ...state,
-                 post: action.payload
+                 post: action.payload,
+                 consultardb:true
              }
         case ELIMINAR_POST:
             return {
@@ -39,7 +42,8 @@ export default (state, action) => {
         case POST_ERROR:
             return {
                 ...state,
-                mensaje: action.payload
+                post:null,
+                consultardb:true
             }
         default:
             return state;

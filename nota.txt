@@ -1,38 +1,61 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { css } from '@emotion/react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 import postContext from '../context/postContext';
 
+
+//import Error404 from '../components/layout/404';
+
 // validaciones
-import useValidacion from '../hooks/useValidacion';
-import validarCrearPost from '../validacion/validarCrearPost';
+// import useValidacion from '../hooks/useValidacion';
+// import validarCrearProducto from '../validacion/validarCrearProducto';
+
 
 
 const EdicionPost = () => {
 
   const postsContext = useContext(postContext);
-  const { post, editarPost, consultardb } = postsContext;
+  const { post, consultardb, editarPost } = postsContext;
   
-  const [error, guardarError ] = useState(false);
+  console.log(post) 
   
-  const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(post, validarCrearPost, postEdit);
+  const [ info, guardarInfo ] = useState({
+    title:'',
+    body:''
+  });
 
-  const { title, body } = valores;
+  const { title, body } = info;
 
+  useEffect(() => {
+     if(consultardb){
+
+       guardarInfo(post);
+     }
+
+  }, [post, consultardb])
+
+
+  //const [ error, guardarError] = useState(false);
+
+  
+  // hook de routing para redireccionar
   const router = useRouter();
 
-  async function postEdit(){
+  const handleChange = e =>{
+    guardarInfo({
+        ...info,
+        [e.target.name] : e.target.value
+    })
+  }
+  if(!post) return <p>Cargando...</p>;
+  // insertarlo en la base de datos
+  const handleSubmit = e =>{  
+    e.preventDefault();
 
-    //Crear nuevo post
-    const nuevoPost = {
-      title,
-      body
-    }
-
-    //insertar en BD
-    editarPost(nuevoPost);
+    editarPost(info);
+  
     router.push('/');
   }
   
@@ -58,10 +81,8 @@ const EdicionPost = () => {
                         name="title"
                         value={title}
                         onChange={handleChange}
-                        onBlur={handleBlur}
                     />
                 </Campo>
-                {errores.title && <Error>{errores.title}</Error> }
 
                 <Campo>
                     <label htmlFor="body">Description</label>
@@ -70,12 +91,9 @@ const EdicionPost = () => {
                         name="body"
                         value={body}
                         onChange={handleChange}
-                        onBlur={handleBlur}
                     />
                 </Campo>
-                {errores.body && <Error>{errores.body}</Error> }
-                      
-                      {error && <Error>{error} </Error>}
+
                 <InputSubmit 
                   type="submit"
                   value="Update"
@@ -88,4 +106,3 @@ const EdicionPost = () => {
 }
 
 export default EdicionPost;
-

@@ -37,7 +37,7 @@ const NuevoPost = () => {
 
     //insertar en BD
     agregarPost(post);
-    return router.push('/');
+    router.push('/');
   }
   
   return (

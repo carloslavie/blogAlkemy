@@ -19,7 +19,8 @@ const PostState = props => {
     const initialState = {
         posts : [],
         post: null, 
-        mensaje: null
+        mensaje: null,
+        consultardb: false
     }
 
     const [state, dispatch] = useReducer(postReducer, initialState)
@@ -48,7 +49,7 @@ const PostState = props => {
                 payload: resultado.data
             })
          }  catch (error) {             
-            console.log(error);
+            alert(error);
          }
      }
 
@@ -62,23 +63,21 @@ const PostState = props => {
                 payload: info
             })
         } catch (error) {
-            console.log(error);
+            alert(error);
+            dispatch({
+                type: POST_ERROR
+            })
         }
     }
 
     //Seleccionar post actual
-    const postActual = async id => {
-        try {
-            const resultado = await clienteAxios.get(`/posts/${id}`)
-            
+    const postActual = post => {
+        
             dispatch({
                 type: POST_ACTUAL,
-                payload: resultado.data
+                payload: post
             })
 
-        } catch (error) {
-            console.log(error)
-        }
 
     }
 
@@ -101,6 +100,7 @@ const PostState = props => {
                 posts: state.posts,
                 post: state.post,
                 mensaje: state.mensaje,
+                consultardb: state.consultardb,
                 obtenerPosts,
                 agregarPost,
                 postActual,

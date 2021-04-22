@@ -15,8 +15,9 @@ const DetallePost = ({post}) => {
 
     const router = useRouter();
 
-    const handleEditar = id =>{
-        postActual(id);
+    const handleEditar = () =>{
+        postActual(post);
+        console.log(post)
         router.push('/edicionPost');
     }
 
@@ -55,7 +56,7 @@ const DetallePost = ({post}) => {
                     <Boton>Detalle</Boton>        
                 </Link>
                 <Boton
-                    onClick={()=>handleEditar(id)}
+                    onClick={handleEditar}
                 >Editar</Boton>                
                 <Boton
                     onClick={()=>handleEliminar(id)}
