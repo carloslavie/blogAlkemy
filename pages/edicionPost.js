@@ -5,7 +5,7 @@ import Layout from '../components/layout/Layout';
 import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 import postContext from '../context/postContext';
 import useValidacion from '../hooks/useValidacion';
-import validarCrearPost from '../validacion/validarCrearPost';
+import validarEditarPost from '../validacion/validarEditarPost';
 
 
 const EdicionPost = () => {
@@ -13,7 +13,7 @@ const EdicionPost = () => {
   const postsContext = useContext(postContext);
   const { post, editarPost } = postsContext;
   
-  const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(post, validarCrearPost, postEdit);
+  const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(post, validarEditarPost, postEdit);
 
   const { first_name, last_name } = valores;
 
