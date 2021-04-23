@@ -1,39 +1,39 @@
 import { 
-    OBTENER_POSTS,
-    AGREGAR_POST,
-    POST_ACTUAL,
-    EDITAR_POST,
-    ELIMINAR_POST,
+    OBTENER_USUARIOS, 
+    AGREGAR_USUARIO,
+    USUARIO_ACTUAL,
+    EDITAR_USUARIO,
+    ELIMINAR_USUARIO,
     POST_ERROR
 } from '../types';
 
 
 export default (state, action) => {
     switch(action.type) {
-        case OBTENER_POSTS:
+        case OBTENER_USUARIOS:
              return {
                  ...state,
                  posts: action.payload
              }
-        case AGREGAR_POST:
+        case AGREGAR_USUARIO:
         return {
             ...state,
             posts: [action.payload, ...state.posts],            
         }
-        case EDITAR_POST:
+        case EDITAR_USUARIO:
             return{
                 ...state,
                 posts: state.posts.map(post=> post.id === action.payload.id ? action.payload : post),
                 consultardb:false,
                 post:null
             }
-        case POST_ACTUAL:
+        case USUARIO_ACTUAL:
              return {
                  ...state,
                  post: action.payload,
                  consultardb:true
              }
-        case ELIMINAR_POST:
+        case ELIMINAR_USUARIO:
             return {
                 ...state,
                 posts: state.posts.filter(post => post.id !== action.payload ),

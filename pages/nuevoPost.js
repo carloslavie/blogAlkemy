@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 import postContext from '../context/postContext';
-
-// validaciones
 import useValidacion from '../hooks/useValidacion';
 import validarCrearPost from '../validacion/validarCrearPost';
 
@@ -20,8 +18,6 @@ const NuevoPost = () => {
   const postsContext = useContext(postContext);
   const { agregarPost } = postsContext;
   
-  const [error, guardarError ] = useState(false);
-  
   const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(STATE_INICIAL, validarCrearPost, crearPost);
 
   const { first_name, last_name, email } = valores;
@@ -30,14 +26,12 @@ const NuevoPost = () => {
 
   async function crearPost(){
 
-    //Crear nuevo post
     const nuevoPost = {
       first_name,
       last_name,
       email
     }
 
-    //insertar en BD
     agregarPost(nuevoPost);
     router.push('/');
   }
@@ -60,7 +54,7 @@ const NuevoPost = () => {
                     <input 
                         type="text"
                         id="first_name"
-                        placeholder="first Name"
+                        placeholder="First Name"
                         name="first_name"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -72,7 +66,7 @@ const NuevoPost = () => {
                     <input 
                         type="text"
                         id="last_name"
-                        placeholder="last_name Name"
+                        placeholder="Last Name"
                         name="last_name"
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -91,10 +85,6 @@ const NuevoPost = () => {
                     />
                 </Campo>
                 {errores.email && <Error>{errores.email}</Error> }
-                        
-                
-                      
-                {error && <Error>{error} </Error>} 
     
                 <InputSubmit 
                   type="submit"

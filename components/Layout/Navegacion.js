@@ -26,8 +26,7 @@ const Navegacion = () => {
             </Link>
             <Link href="/nuevoPost">
                     <a>New Post</a>
-            </Link>
-            
+            </Link>            
         </Nav>
      );
 }

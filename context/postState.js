@@ -3,11 +3,11 @@ import React, { useReducer } from 'react';
 import postContext from './postContext';
 import postReducer from './postReducer';
 import { 
-    OBTENER_POSTS, 
-    AGREGAR_POST,
-    POST_ACTUAL,
-    EDITAR_POST,
-    ELIMINAR_POST,
+    OBTENER_USUARIOS, 
+    AGREGAR_USUARIO,
+    USUARIO_ACTUAL,
+    EDITAR_USUARIO,
+    ELIMINAR_USUARIO,
     POST_ERROR
 } from '../types';
 
@@ -18,28 +18,25 @@ const PostState = props => {
 
     const initialState = {
         posts : [],
-        post: null, 
-        mensaje: null,
-        consultardb: false
+        post: null
     }
 
     const [state, dispatch] = useReducer(postReducer, initialState)
 
-    // Obtener los posteos
+    // Obtener los usuarios
     const obtenerPosts = async () => {
         try {
             const resultado = await clienteAxios.get('/api/users');
-            console.log(resultado.data.data)
-            
+                        
             dispatch({
-                type: OBTENER_POSTS,
+                type: OBTENER_USUARIOS,
                 payload: resultado.data.data
             })
         } catch (error) {
             console.log(error);            
         }    
     }
-    //Agregar nuevo post
+    //Agregar nuevo usuario
     const agregarPost = async post => {
 
          try {
@@ -47,7 +44,7 @@ const PostState = props => {
             console.log(resultado)
              
             dispatch({
-                type: AGREGAR_POST,
+                type: AGREGAR_USUARIO,
                 payload: post
             })
          }  catch (error) {             
@@ -55,13 +52,13 @@ const PostState = props => {
          }
      }
 
-    //Actualizar un post
+    //Actualizar un usuario
     const editarPost = async info => {        
         try {
             await clienteAxios.put(`/api/users${info.id}`, info)
            
             dispatch({
-                type: EDITAR_POST,
+                type: EDITAR_USUARIO,
                 payload: info
             })
         } catch (error) {
@@ -72,23 +69,21 @@ const PostState = props => {
         }
     }
 
-    //Seleccionar post actual
+    //Seleccionar usuario actual
     const postActual = post => {
         
             dispatch({
-                type: POST_ACTUAL,
+                type: USUARIO_ACTUAL,
                 payload: post
             })
-
-
     }
 
-    // Elimina un proyecto
+    // Elimina un usuario
     const eliminarPost = async id => {
         try {
             await clienteAxios.delete(`/api/users${id}`);
             dispatch({
-                type: ELIMINAR_POST,
+                type: ELIMINAR_USUARIO,
                 payload: id
             })
         } catch (error) {
@@ -101,8 +96,6 @@ const PostState = props => {
             value={{
                 posts: state.posts,
                 post: state.post,
-                mensaje: state.mensaje,
-                consultardb: state.consultardb,
                 obtenerPosts,
                 agregarPost,
                 postActual,

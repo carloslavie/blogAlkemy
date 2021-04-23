@@ -16,12 +16,10 @@ const DetallePost = ({post}) => {
 
     const handleDetalle = () =>{
         postActual(post);
-        console.log(post)
         router.push('/detallePost');
     }
     const handleEditar = () =>{
         postActual(post);
-        console.log(post)
         router.push('/edicionPost');
     }
 

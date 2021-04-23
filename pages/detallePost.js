@@ -1,10 +1,7 @@
-import React, { useEffect, useContext, useState } from 'react';
-
+import React, { useContext } from 'react';
 import Layout from '../components/Layout/Layout';
-
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-
 import postContext from '../context/postContext';
 
 
@@ -13,7 +10,6 @@ const ContenedorProducto = styled.div`
     flex-direction:column;
     justify-content:flex-start;
     align-items:center;   
-    //@media (min-width: 768px){ }
 `;
 
 const Nombre = styled.p`
@@ -35,8 +31,7 @@ const detallePost = () => {
     
     return ( 
         <Layout>
-            <>
-            
+            <>            
                 <ContenedorProducto>
                     <img
                     css={css`
@@ -47,8 +42,7 @@ const detallePost = () => {
                     <Nombre>{first_name} {last_name}</Nombre>
                     <p>Email: {email}</p>
                     
-                </ContenedorProducto>
-            
+                </ContenedorProducto>            
             </>
         </Layout>
      );

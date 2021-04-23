@@ -1,11 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import Layout from '../components/layout/Layout';
 import { Formulario, Campo, InputSubmit, Error } from '../components/ui/Formulario';
 import postContext from '../context/postContext';
-
-// validaciones
 import useValidacion from '../hooks/useValidacion';
 import validarCrearPost from '../validacion/validarCrearPost';
 
@@ -13,9 +11,7 @@ import validarCrearPost from '../validacion/validarCrearPost';
 const EdicionPost = () => {
 
   const postsContext = useContext(postContext);
-  const { post, editarPost, consultardb } = postsContext;
-  
-  const [error, guardarError ] = useState(false);
+  const { post, editarPost } = postsContext;
   
   const { valores, errores, handleChange, handleSubmit, handleBlur} = useValidacion(post, validarCrearPost, postEdit);
 
@@ -25,13 +21,11 @@ const EdicionPost = () => {
 
   async function postEdit(){
 
-    //Crear nuevo post
     const nuevoPost = {
       first_name,
       last_name
     }
 
-    //insertar en BD
     editarPost(nuevoPost);
     router.push('/');
   }
@@ -76,7 +70,6 @@ const EdicionPost = () => {
                 </Campo>
                 {errores.last_name && <Error>{errores.last_name}</Error> }
                       
-                      {error && <Error>{error} </Error>}
                 <InputSubmit 
                   type="submit"
                   value="Update"
