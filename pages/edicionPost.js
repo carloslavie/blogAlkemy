@@ -65,7 +65,8 @@ const EdicionPost = () => {
 
                 <Campo>
                     <label htmlFor="last_name">Last Name</label>
-                    <textarea 
+                    <input 
+                        type="text"
                         id="last_name"
                         name="last_name"
                         value={last_name}

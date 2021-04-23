@@ -21,7 +21,7 @@ const Home = () => {
       <Layout>
         <div className="listado-productos">
             <div className="contenedor">
-              <h1>Post`s List</h1>
+              <h1>Users List</h1>
               <ul className="bg-white">
                    {posts.map(post => (
                       <DetallePost

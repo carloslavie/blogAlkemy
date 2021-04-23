@@ -13,9 +13,10 @@ const Boton = styled.button`
     &:hover{
         cursor:pointer;
     }
-    @media only screen and (max-width:600px){
-        padding:2%;
-        margin:2%;       
+    @media only screen and (max-width:768px){
+        padding:1% 2%;
+        margin:5% 2%;  
+        font-size:90%;     
     }
 `;
 

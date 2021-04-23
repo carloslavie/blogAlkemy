@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import Boton from '../ui/Boton';
 import { css } from '@emotion/react';
-import Link from 'next/link'
 import { useRouter } from 'next/router';
 import postContext from '../../context/postContext';
 
@@ -11,10 +10,9 @@ const DetallePost = ({post}) => {
     const postsContext = useContext(postContext);
     const { postActual, eliminarPost } = postsContext;
 
-    const { email, id } = post;
+    const { first_name, last_name, id } = post;
 
     const router = useRouter();
-
 
     const handleDetalle = () =>{
         postActual(post);
@@ -38,16 +36,20 @@ const DetallePost = ({post}) => {
             display:flex;
             justify-content:space-between;
             border-bottom:1px solid #e1e1e1;
-            @media only screen and (max-width:600px){
+            @media only screen and (max-width:768px){
+                max-width:90%;
                 display:block;
-            }
-        `}>                
-            
+            } 
+        `}>          
             <h3
                 css={css`
                     margin:1rem;
+                    @media only screen and (max-width:768px){
+                        text-align:center;
+                        font-size: 3rem;
+                    }
                 `}
-            >{email}</h3>
+            >{first_name} {last_name}</h3>
             
             <div
                 css={css`
@@ -57,8 +59,7 @@ const DetallePost = ({post}) => {
                 @media only screen and (max-width:600px){
                 justify-content:center;                
                 }
-            `}>
-                
+            `}>                
                 <Boton
                     onClick={handleDetalle}
                 >Detalle</Boton>        
